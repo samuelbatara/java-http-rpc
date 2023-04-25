@@ -1,0 +1,39 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.10'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
+	implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.65'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+	// https://mvnrepository.com/artifact/net.minidev/json-smart
+	implementation 'net.minidev:json-smart:2.4.7'
+	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+	implementation 'org.slf4j:slf4j-api:1.7.25'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
