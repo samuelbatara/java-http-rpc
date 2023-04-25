@@ -1,13 +1,17 @@
 package com.demo.http;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class JsonRpcHttpRequestHandler {
   private final String url;
-  private final int defaultConnectTimeOut = 1000; // 1 second
-  private final int defaultReadTimeout = 1000; // 1 second
+  private final int defaultConnectTimeOut = 5000; // 1 second
+  private final int defaultReadTimeout = 2000; // 1 second
   private final String method = "POST";
   private HttpURLConnection connection;
 
@@ -25,8 +29,9 @@ public class JsonRpcHttpRequestHandler {
     }
   }
 
-  public String handleRequest(byte[] body) throws IOException {
+  public String handleRequest(String request) throws IOException {
     // additional connection settings
+    byte[] body = request.getBytes(StandardCharsets.UTF_8);
     connection.setRequestProperty("Content-Length", Integer.toString(body.length));
 
     // send request
@@ -36,15 +41,25 @@ public class JsonRpcHttpRequestHandler {
     outputStream.close();
 
     // read response
-    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-    String line;
-    StringBuilder builder = new StringBuilder();
-    while ((line = reader.readLine()) != null) {
-      builder.append(line);
+    String result;
+    InputStream inputStream = null;
+    ByteArrayOutputStream byteArrayOutputStream = null;
+    try {
+      inputStream = connection.getInputStream();
+      byteArrayOutputStream = new ByteArrayOutputStream();
+      final int size = 32 * 1024;
+      byte[] buffer = new byte[size];
+      int byteReads;
+      while ((byteReads = inputStream.read(buffer)) != -1) {
+        byteArrayOutputStream.write(buffer, 0, byteReads);
+      }
+    } finally {
+      result = byteArrayOutputStream.toString("UTF-8");
+      inputStream.close();
+      byteArrayOutputStream.close();
     }
-    reader.close();
 
-    return builder.toString();
+    return result;
   }
 
   public void setConnectTimeout(int connectTimeout) {

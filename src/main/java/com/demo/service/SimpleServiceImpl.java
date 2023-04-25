@@ -25,4 +25,13 @@ public class SimpleServiceImpl implements SimpleService {
     return new Response(texts);
   }
 
+  @Override
+  public long calculate(int x, int[] array) {
+    long sum = 0;
+    for (int e : array) {
+      sum += x * e;
+    }
+    return sum;
+  }
+
 }

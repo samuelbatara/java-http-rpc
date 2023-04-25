@@ -4,7 +4,7 @@ import java.lang.reflect.Proxy;
 
 public class DynamicRpcHttpProxy<T extends Object> {
   private final DynamicHttpInvocationHandler dynamicHttpInvocationHandler;
-  private T proxy;
+  private T proxy = null;
   private Class _instance;
 
   public DynamicRpcHttpProxy(Class _instance,
@@ -13,7 +13,7 @@ public class DynamicRpcHttpProxy<T extends Object> {
     this.dynamicHttpInvocationHandler = dynamicHttpInvocationHandler;
   }
 
-  public T getProxy() {
+  public synchronized T getProxy() {
     if (proxy == null) {
       try {
         proxy = (T) Proxy.newProxyInstance(
