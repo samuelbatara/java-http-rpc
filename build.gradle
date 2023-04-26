@@ -1,8 +1,6 @@
 plugins {
 	id 'java'
 	id 'maven-publish'
-	id 'org.springframework.boot' version '2.7.10'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 publishing {
@@ -39,10 +37,6 @@ repositories {
 }
 
 dependencies {
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
 	implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.65'
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
