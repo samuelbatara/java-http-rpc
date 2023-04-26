@@ -24,8 +24,8 @@ publishing {
 	}
 }
 
-group = 'com.samuelbatara'
-version = '0.0.1-SNAPSHOT'
+group = 'com.samuelbatara.http'
+version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
