@@ -17,6 +17,11 @@ publishing {
 			}
 		}
 	}
+	publications {
+		gpr(MavenPublication) {
+			from(components.java)
+		}
+	}
 }
 
 group = 'com.samuelbatara'
