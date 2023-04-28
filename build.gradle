@@ -1,25 +1,27 @@
 plugins {
-	id 'java'
-	id 'maven-publish'
+  id 'java'
+  id 'maven-publish'
+  id 'org.springframework.boot' version '2.7.5'
+  id 'io.spring.dependency-management' version '1.1.0'
 }
 
 publishing {
 
-	repositories {
-		maven {
-			name = "GitHubPackages"
-			url = "https://maven.pkg.github.com/samuelbatara/java-http-rpc"
-			credentials {
-				username = System.getenv("GITHUB_ACTOR")
-				password = System.getenv("GITHUB_TOKEN")
-			}
-		}
-	}
-	publications {
-		gpr(MavenPublication) {
-			from(components.java)
-		}
-	}
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/samuelbatara/java-http-rpc"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+  publications {
+    gpr(MavenPublication) {
+      from(components.java)
+    }
+  }
 }
 
 group = 'com.samuelbatara.http'
@@ -27,29 +29,39 @@ version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral()
+}
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
 
 dependencies {
-	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
-	implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.65'
-	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
-	// https://mvnrepository.com/artifact/net.minidev/json-smart
-	implementation 'net.minidev:json-smart:2.4.7'
-	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-	implementation 'org.slf4j:slf4j-api:1.7.25'
-	// https://mvnrepository.com/artifact/com.google.code.gson/gson
-	implementation 'com.google.code.gson:gson:2.8.9'
+  // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
+  implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.65'
+  // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+  // https://mvnrepository.com/artifact/net.minidev/json-smart
+  implementation 'net.minidev:json-smart:2.4.7'
+  // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+  implementation 'org.slf4j:slf4j-api:1.7.25'
+  // https://mvnrepository.com/artifact/com.google.code.gson/gson
+  implementation 'com.google.code.gson:gson:2.8.9'
 
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-test'
+  implementation 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+  useJUnitPlatform()
 }

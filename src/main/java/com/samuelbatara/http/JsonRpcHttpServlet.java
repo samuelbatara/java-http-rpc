@@ -1,6 +1,6 @@
-package com.demo.http;
+package com.samuelbatara.http;
 
-import com.demo.util.JsonNodeParser;
+import com.samuelbatara.util.JsonNodeParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -24,12 +24,12 @@ public class JsonRpcHttpServlet extends HttpServlet {
   private static String PARAMS = "params";
   private static String METHOD = "method";
   private final ObjectWriter objectWriter;
-  private final Class serviceClass;
+  private final Class serviceInterface;
   private final Object serviceImpl;
   private static final Logger log = LoggerFactory.getLogger(JsonRpcHttpServlet.class);
 
-  public JsonRpcHttpServlet(Class serviceClass, Object serviceImpl, ObjectWriter objectWriter) {
-    this.serviceClass = serviceClass;
+  public JsonRpcHttpServlet(Class serviceInterface, Object serviceImpl, ObjectWriter objectWriter) {
+    this.serviceInterface = serviceInterface;
     this.serviceImpl = serviceImpl;
     this.objectWriter = objectWriter;
   }
@@ -55,7 +55,7 @@ public class JsonRpcHttpServlet extends HttpServlet {
     Method fMethod = null;
 
     try {
-      methods = serviceClass.getMethods();
+      methods = serviceInterface.getMethods();
       for (Method method : methods) {
         if (method.getName().equals(jsonNode.get(METHOD).textValue())) {
           paramTypes = method.getParameterTypes();

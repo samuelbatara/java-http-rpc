@@ -1,4 +1,4 @@
-package com.demo.proxy;
+package com.samuelbatara.proxy;
 
 import com.google.gson.Gson;
 
