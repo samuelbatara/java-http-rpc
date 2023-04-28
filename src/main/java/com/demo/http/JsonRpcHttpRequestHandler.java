@@ -13,10 +13,15 @@ public class JsonRpcHttpRequestHandler {
   private final int defaultConnectTimeOut = 5000; // 1 second
   private final int defaultReadTimeout = 2000; // 1 second
   private final String method = "POST";
-  private HttpURLConnection connection;
 
   public JsonRpcHttpRequestHandler(String url) {
     this.url = url;
+  }
+
+  public String handleRequest(String request) throws IOException {
+    // additional connection settings
+    byte[] body = request.getBytes(StandardCharsets.UTF_8);
+    HttpURLConnection connection = null;
     try {
       connection = (HttpURLConnection) new URL(url).openConnection();
       connection.setRequestMethod(method);
@@ -24,15 +29,10 @@ public class JsonRpcHttpRequestHandler {
       connection.setRequestProperty("Content-Type", "application/json");
       connection.setConnectTimeout(defaultConnectTimeOut);
       connection.setReadTimeout(defaultReadTimeout);
+      connection.setRequestProperty("Content-Length", Integer.toString(body.length));
     } catch (Exception e) {
       System.out.println("failed to open connection to " + url);
     }
-  }
-
-  public String handleRequest(String request) throws IOException {
-    // additional connection settings
-    byte[] body = request.getBytes(StandardCharsets.UTF_8);
-    connection.setRequestProperty("Content-Length", Integer.toString(body.length));
 
     // send request
     OutputStream outputStream = connection.getOutputStream();
