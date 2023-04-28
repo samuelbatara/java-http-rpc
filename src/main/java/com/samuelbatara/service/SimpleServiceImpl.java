@@ -2,7 +2,12 @@ package com.samuelbatara.service;
 
 import com.samuelbatara.model.Product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SimpleServiceImpl implements SimpleService {
+
+	private final List<Product> products = new ArrayList<>();
 
 	@Override
 	public String greeting(String name) {
@@ -10,7 +15,7 @@ public class SimpleServiceImpl implements SimpleService {
 	}
 
 	@Override
-	public Product getProduct(long id) {
-		return new Product(id, "Ancol", 150000);
+	public List<Product> getProducts() {
+		return products;
 	}
 }

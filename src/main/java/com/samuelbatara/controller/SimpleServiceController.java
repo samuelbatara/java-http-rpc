@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/requests")
 public class SimpleServiceController {
@@ -27,7 +29,7 @@ public class SimpleServiceController {
 	}
 
 	@GetMapping("/product")
-	public Product getProductProxy() {
-		return simpleService.getProduct(1);
+	public List<Product> getProductsProxy() {
+		return simpleService.getProducts();
 	}
 }

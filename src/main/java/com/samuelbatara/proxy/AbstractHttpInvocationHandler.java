@@ -25,7 +25,11 @@ public abstract class AbstractHttpInvocationHandler {
       this.jsonRpc = JSON_RPC;
       this.id = ID;
       this.method = method;
-      this.params = args;
+      if (args == null) {
+        this.params = new Object[0];
+      } else {
+        this.params = args;
+      }
     }
 
     public void setJsonRpc(String jsonRpc) {

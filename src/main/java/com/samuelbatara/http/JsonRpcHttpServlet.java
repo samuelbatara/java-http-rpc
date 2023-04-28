@@ -48,7 +48,14 @@ public class JsonRpcHttpServlet extends HttpServlet {
 
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode = objectMapper.readTree(jsonObject.toString());
+    if (jsonNode.get(PARAMS) == null) {
+      log.error("\t[x] params was not found");
+      log.info("\t [x] " + jsonNode.toString());
+      return;
+    }
+
     List<JsonNode> paramNodes = JsonNodeParser.getElements(jsonNode.get(PARAMS));
+
     Object[] params = new Object[paramNodes.size()];
     Class<?>[] paramTypes = null;
     Method[] methods;
