@@ -23,7 +23,7 @@ publishing {
 }
 
 group = 'com.samuelbatara.http'
-version = '1.0.1'
+version = '1.0.2'
 sourceCompatibility = '11'
 
 configurations {
