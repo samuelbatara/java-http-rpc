@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface SimpleService {
 	String greeting(String name);
-	List<Product> getProducts();
+	Product[] getProducts();
 }

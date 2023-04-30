@@ -29,7 +29,12 @@ public class SimpleServiceController {
 	}
 
 	@GetMapping("/product")
-	public List<Product> getProductsProxy() {
+	public Product[] getProductsProxy() {
 		return simpleService.getProducts();
+	}
+
+	@GetMapping("/product-one")
+	public Product getProductOneProxy() {
+		return simpleService.getProducts()[0];
 	}
 }

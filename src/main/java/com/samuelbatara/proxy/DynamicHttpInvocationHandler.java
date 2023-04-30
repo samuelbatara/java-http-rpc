@@ -29,7 +29,10 @@ public class DynamicHttpInvocationHandler extends AbstractHttpInvocationHandler 
     // convert output to json
     Object objectResult;
     try {
+      System.out.println("\t[x] String result '" + stringResult + "'");
+      System.out.println("\t[x] will converted to " + method.getReturnType());
       objectResult = gson.fromJson(stringResult, method.getReturnType());
+      System.out.println("\t[x] Object result '" + objectResult.toString() + "'");
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

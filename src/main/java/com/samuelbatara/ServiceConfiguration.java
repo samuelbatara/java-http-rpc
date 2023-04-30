@@ -22,7 +22,7 @@ public class ServiceConfiguration {
 	@Bean("simple-service-proxy")
 	public SimpleService simpleServiceProxy() {
 		JsonRpcHttpRequestHandler httpRequestHandler = new JsonRpcHttpRequestHandler(
-				"http://localhost:9000/" + SimpleServiceImpl.class.getName()
+				"http://localhost:8080/" + SimpleServiceImpl.class.getName()
 		);
 		DynamicHttpInvocationHandler httpInvocationHandler = new DynamicHttpInvocationHandler(
 				httpRequestHandler

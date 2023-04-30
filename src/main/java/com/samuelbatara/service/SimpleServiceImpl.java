@@ -7,7 +7,12 @@ import java.util.List;
 
 public class SimpleServiceImpl implements SimpleService {
 
-	private final List<Product> products = new ArrayList<>();
+	private final Product[] products = new Product[2];
+
+	public SimpleServiceImpl() {
+		products[0] = new Product(1, "Ancol", 110000);
+		products[1] = new Product(1, "Ancol", 110000);
+	}
 
 	@Override
 	public String greeting(String name) {
@@ -15,7 +20,7 @@ public class SimpleServiceImpl implements SimpleService {
 	}
 
 	@Override
-	public List<Product> getProducts() {
+	public Product[] getProducts() {
 		return products;
 	}
 }
