@@ -1,6 +1,6 @@
-package com.demo.proxy;
+package com.samuelbatara.proxy;
 
-import com.demo.http.JsonRpcHttpRequestHandler;
+import com.samuelbatara.http.JsonRpcHttpRequestHandler;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
