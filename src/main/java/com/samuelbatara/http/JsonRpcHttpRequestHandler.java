@@ -1,4 +1,4 @@
-package com.demo.http;
+package com.samuelbatara.http;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

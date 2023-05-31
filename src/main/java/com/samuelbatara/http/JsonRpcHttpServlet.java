@@ -1,6 +1,6 @@
-package com.demo.http;
+package com.samuelbatara.http;
 
-import com.demo.util.JsonNodeParser;
+import com.samuelbatara.util.JsonNodeParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
